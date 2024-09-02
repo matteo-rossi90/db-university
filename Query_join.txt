@@ -42,7 +42,8 @@ ORDER BY `students`.`surname` , `students`.`name`
 
 5. Selezionare tutti i corsi di laurea con i relativi corsi e insegnanti
 
-SELECT `degrees`.*, `courses`.`name`, `teachers`.`name`, `teachers`.`surname`
+SELECT `degrees`.* AS `corsi_di_laurea`, `courses`.`name` AS `insegnamenti`, `teachers`.`name` AS `nome_insegnante`, 
+`teachers`.`surname` AS `cognome_insegnante`
 FROM `degrees`
 JOIN `courses` ON `courses`.`degree_id` = `degrees`.`id`
 JOIN `course_teacher` ON `course_teacher`.`course_id` = `courses`.`id`
@@ -65,8 +66,8 @@ BONUS: Selezionare per ogni studente il numero di tentativi sostenuti
 per ogni esame, stampando anche il voto massimo. Successivamente,
 filtrare i tentativi con voto minimo 18
 
-SELECT `students`.`id` AS `student_id`, `students`.`name` AS `nome`, `students`.`surname` AS `cognome`,`exams`.`id`,
-COUNT(`exam_student`.`exam_id`) AS `attempt_count`, MAX(`exam_student`.`vote`) AS `voto`
+SELECT `students`.`id` AS `studenti_id`, `students`.`name` AS `nome`, `students`.`surname` AS `cognome`,`exams`.`id`,
+COUNT(`exam_student`.`exam_id`) AS `tentativi_esame`, MAX(`exam_student`.`vote`) AS `voto`
 FROM `students`
 JOIN `exam_student` ON `students`.`id` = `exam_student`.`student_id`
 JOIN `exams` ON `exams`.`id` = `exam_student`.`exam_id`
